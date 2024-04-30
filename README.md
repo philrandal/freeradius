@@ -1,4 +1,4 @@
-[PACKAGE]: ../../raw/master/packagee-0.1.2-20230706.mkp "package-0.1.2-20230706.mkp"
+[PACKAGE]: ../../raw/master/mkp/freeradius-0.1.1-20240430.mkp "freeradius-0.1.1-20240430.mkp"
 # Title
 
 A short description about the plugin

@@ -1,0 +1,23 @@
+{'author': 'Th.L. (thl-cmk[at]outlook[dot]com)',
+ 'description': 'FreeRADIUS special agent\n'
+                '\n'
+                'You need to enable the status server on the FreeRADIUS server '
+                'and make it\n'
+                'accessible from the CMK site.\n'
+                '\n'
+                'NOTE: this plugin needs _pyrad_ to work.\n',
+ 'download_url': 'https://thl-cmk.hopto.org',
+ 'files': {'agent_based': ['freeradius.py'],
+           'agents': ['special/agent_freeradius'],
+           'checks': ['agent_freeradius'],
+           'gui': ['metrics/freeradius.py'],
+           'lib': ['python3/cmk/special_agents/agent_freeradius.py',
+                   'python3/cmk/special_agents/dictionary',
+                   'python3/cmk/special_agents/dictionary.freeradius'],
+           'web': ['plugins/wato/agent_freeradiusi.py']},
+ 'name': 'freeradius',
+ 'title': 'FreeRADIUS special agent',
+ 'version': '0.1.1-20240430',
+ 'version.min_required': '2.2.0b1',
+ 'version.packaged': '2.2.0p24',
+ 'version.usable_until': '2.3.0b1'}
