@@ -1,6 +1,6 @@
 # Contributing
 
-If you have any issues or ideas for improvement you can contact me in the [CMK forum](https://forum.checkmk.com/) by sending me a direct message to `@thl-cmk` (this is the prefered way) or send an email to _thl-cmk[at]outlook[dot]com_.
+If you have any issues or ideas for improvement, you can contact me in the [CMK forum](https://forum.checkmk.com/) by sending me a direct message to `@thl-cmk` (this is the prefered way) or send an email to _thl-cmk[at]outlook[dot]com_.
 
 Please include:
 - your CMK version/edition
@@ -9,39 +9,13 @@ Please include:
 - the version of the plugin
 - the crash report (if any)
 
-For active checks I might need the output of the check command. I.e.
-
-```
-~$ ./local/lib/nagios/plugins/check_ntp -H ares
-Stratum: 3, Reference ID: 194.25.134.196, Time: Sun Apr  7 13:38:52 2024
- ....
- | ntp_offset=-0.005115509033203125;0.2;0.5; ntp_delay=0.02794170379638672;0.2;0.5; ntp_root_dispersion=0.0051116943359375;200;500;
-
-```
-
 For agent based plugins I might need also the agent output of the plugin.
 ```
-$ /omd/sites/build/local/share/check_mk/agents/special/agent_cisco_meraki Meraki_Cloud 
-<<<cisco_meraki_org_organisations:sep(0)>>>
-...
-...
-...
+~$ /omd/sites/build/local/share/check_mk/agents/special/agent_freeradius '-H freeradius' --auth-port 18121 --secret bigsecret --debug
 
-```
+<<<freeradius:sep(0)>>>
+{"FreeRADIUS-Total-Access-Requests": 6142999, "FreeRADIUS-Total-Access-Accepts": 6072700, "FreeRADIUS-Total-Access-Rejects": 68440, "FreeRADIUS-Total-Access-Challenges": 0, "FreeRADIUS-Total-Auth-Responses": 6141140, "FreeRADIUS-Total-Auth-Duplicate-Requests": 970, "FreeRADIUS-Total-Auth-Malformed-Requests": 0, "FreeRADIUS-Total-Auth-Invalid-Requests": 0, "FreeRADIUS-Total-Auth-Dropped-Requests": 970, "FreeRADIUS-Total-Auth-Unknown-Types": 0, "FreeRADIUS-Total-Auth-Conflicts": 0, "FreeRADIUS-Total-Accounting-Requests": 0, "FreeRADIUS-Total-Accounting-Responses": 0, "FreeRADIUS-Total-Acct-Duplicate-Requests": 0, "FreeRADIUS-Total-Acct-Malformed-Requests": 0, "FreeRADIUS-Total-Acct-Invalid-Requests": 0, "FreeRADIUS-Total-Acct-Dropped-Requests": 0, "FreeRADIUS-Total-Acct-Unknown-Types": 0, "FreeRADIUS-Total-Acct-Conflicts": 0, "FreeRADIUS-Total-Proxy-Access-Requests": 0, "FreeRADIUS-Total-Proxy-Access-Accepts": 0, "FreeRADIUS-Total-Proxy-Access-Rejects": 0, "FreeRADIUS-Total-Proxy-Access-Challenges": 0, "FreeRADIUS-Total-Proxy-Auth-Responses": 0, "FreeRADIUS-Total-Proxy-Auth-Duplicate-Requests": 0, "FreeRADIUS-Total-Proxy-Auth-Malformed-Requests": 0, "FreeRADIUS-Total-Proxy-Auth-Invalid-Requests": 0, "FreeRADIUS-Total-Proxy-Auth-Dropped-Requests": 0, "FreeRADIUS-Total-Proxy-Auth-Unknown-Types": 0, "FreeRADIUS-Total-Proxy-Accounting-Requests": 0, "FreeRADIUS-Total-Proxy-Accounting-Responses": 0, "FreeRADIUS-Total-Proxy-Acct-Duplicate-Requests": 0, "FreeRADIUS-Total-Proxy-Acct-Malformed-Requests": 0, "FreeRADIUS-Total-Proxy-Acct-Invalid-Requests": 0, "FreeRADIUS-Total-Proxy-Acct-Dropped-Requests": 0, "FreeRADIUS-Total-Proxy-Acct-Unknown-Types": 0, "FreeRADIUS-Stats-Start-Time": 1714413687, "FreeRADIUS-Stats-HUP-Time": 1714417601, "FreeRADIUS-Queue-Len-Internal": 0, "FreeRADIUS-Queue-Len-Proxy": 0, "FreeRADIUS-Queue-Len-Auth": 0, "FreeRADIUS-Queue-Len-Acct": 0, "FreeRADIUS-Queue-Len-Detail": 0, "FreeRADIUS-Queue-PPS-In": 0, "FreeRADIUS-Queue-PPS-Out": 0}
+<<<>>>
 
-For SNMP based plugins I migth need a snmpwalk fom the device in question. This must contain
-```
-.1.3.6.1.2.1.1.1 sysDescr
-.1.3.6.1.2.1.1.2 sysObjectID
-```
-and all the SNMP OIDs used in the plugin.
-If you run the snmpwalk command, please uses these options -ObentU in addition to your snmp options like community, version etc.
-For example:
-
-```
-snmpwalk -v2c -c public -ObentU 10.10.10.10 .1.3.6.1.2.1.1.1 > hostname.snmpwalk
-snmpwalk -v2c -c public -ObentU 10.10.10.10 .1.3.6.1.2.1.1.2 >> hostname.snmpwalk
-snmpwalk -v2c -c public -ObentU 10.10.10.10 .1.0.8802.1.1.2.1.4.1.1 >> hostname.snmpwalk
-snmpwalk -v2c -c public -ObentU 10.10.10.10 .1.0.8802.1.1.2.1.3.7.1.3 >> hostname.snmpwalk
 ```
 
