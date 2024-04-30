@@ -5,7 +5,10 @@
                 'and make it\n'
                 'accessible from the CMK site.\n'
                 '\n'
-                'NOTE: this plugin needs _pyrad_ to work.\n',
+                'NOTE: this plugin needs _pyrad_ to work.\n'
+                '\n'
+                'For more information and the latest version see:\n'
+                'https://thl-cmk.hopto.org/gitlab/checkmk/vendor-independent/check_radius\n',
  'download_url': 'https://thl-cmk.hopto.org',
  'files': {'agent_based': ['freeradius.py'],
            'agents': ['special/agent_freeradius'],
