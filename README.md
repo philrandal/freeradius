@@ -1,19 +1,13 @@
 [PACKAGE]: ../../raw/master/mkp/freeradius-0.1.1-20240430.mkp "freeradius-0.1.1-20240430.mkp"
-# Title
+[PYRADLIB]: ../../raw/master/mkp/pyrad-2.4.0-240421.mkp "pyrad-2.4.0-240421.mkp"
+# FreeRADIUS
 
-A short description about the plugin
-
-if there are more than on plugin put it in collapsable sections
-<details><summary>check_plugin_1</summary>
-
-</details>
-<details><summary>check_pluhin_2</summary>
-
-</details>
+This is a special agent to monitor FreeRADIUS servers. It will connect to the FreeRADIUS status server using the RADIUS protocol.
 
 ---
 ### Download
 * [Download latest mkp file][PACKAGE]
+* [pyrad-2.4.0-240421.mkp][PYRADLIB] The pyrad lib as MKP (contains pyrad 2.4, six 1.16.0, netaddr 1.2.1).
 
 **Note**: before you update to a newer version, always check the [CHANGELOG](CHANGELOG). There migth be incompatible changes.
                         
@@ -28,6 +22,8 @@ mkp enable PAKAGE_NAME VERSION
 
 In the Enterprise/Free/Cloud edition of CheckMK you can use the GUI to install the package (_Setup_ -> _Extension Packages_ -> _Upload package_)
 
+**Note**: before you can use this plugin you need to install the python lib [**_pyrad_**](https://github.com/pyradius/pyrad) into your CMK site. This can be done by issuing the command `pip3 install pyrad` as site user, as long as your CMK server has internet access. If you prefer not to download the pyrad lib from the internet you can also use the additional MKP package **_pyrad-2.4.0-240421.mkp_** (see above).
+
 ---
 ### Want to Contribute?
 
@@ -36,15 +32,17 @@ Nice ;-) Have a look at the [contribution guidelines](CONTRIBUTING.md "Contribut
 ---
 ### Check Info
 
-The plugin creates the service **_SERVICENAME_** for each discovered FOR WHAT with the **_HOW_TO_BUILD_THE_ITEM_** as item
+The plugin creates the services
+- FreeRADIUS
+- FreeRADIUS accounting
+- FreeRADIUS authentication
+- FreeRADIUS proxy accounting
+- FreeRADIUS proxy authentication
+- FreeRADIUS queue
 
 <details><summary>Montoring states</summary>
 
-| State | condition | WATO | 
-| ------ | ------ | ------ |
-| WARN | condition 1 | yes |
-| CRIT | condition 2 | no |
-| WARN/CRIT | condition 3 | no |
+The state is always OK, except for configured levels.
 
 </details>
 
@@ -52,43 +50,59 @@ The plugin creates the service **_SERVICENAME_** for each discovered FOR WHAT wi
 
 | Metric | Unit | Perfometer |
 | ------ | ------ | ------ |
-| METRIC 1 | bit/s | yes |
-| METRIC 2 | C | yes |
-| METRIC 3 | V | no |
+| Uptime | s | yes |
+| Reload | s | no |
+| Queue: PPS In/Out | count | yes |
+| Queue: Accounting/Authentication/Detail/Internal/Proxy | count | no |
+| (Proxy) Accounting/Authentication: Requests/Responses | 1/s | yes |
+| (Proxy) Accounting/Authentication: Conflicts/Dropped/Malformed/Invalid/Unknown Types | 1/s | no |
+| (Proxy) Authentication: Accepts/Rejects/Dropped/Challenges | 1/s | no |
+
 
 </details>
 
 ---
 ### WATO
-<details><summary>Service monitoring rule</summary>
+<details><summary>Special agent rule</summary>
 
 | Section | Rule name |
 | ------ | ------ |
-| Networking | NAME_OF_THE_RULE  |
+| Other integrations -> Applications | FreeRADIUS  |
 
 | Option | Defailt value |
 | ------ | ------ |
-| OPTION 1 | 10/50|
-| OPTION 2 | 70/90 |
-| OPTION 3 | CHOICE 1 |
-| OPTION 4 | disabled |
+| Authentication port | 18121 |
+| Shared secret | none |
+| Request timeout | 2 seconds |
+
+</details> 
+
+<details><summary>Service monitoring rules</summary>
+
+| Section | Rule name |
+| ------ | ------ |
+| Applications, Processes & Services | FreeRADIUS  |
+| Applications, Processes & Services | FreeRADIUS  acconting |
+| Applications, Processes & Services | FreeRADIUS  authentication |
+| Applications, Processes & Services | FreeRADIUS  proxy accounting |
+| Applications, Processes & Services | FreeRADIUS  proxy authentication |
+| Applications, Processes & Services | FreeRADIUS  queue |
+
+| Option | Defailt value | Comment |
+| ------ | ------ | ---- | 
+| List response attributes in service details | No | for each servise |
+| Upper Levels | none | for each monitored attribute |
+| Lower Levels | none | for each monitored attribute |
+| Show on info line | no | for each monitored attribute |
 
 </details> 
 
 <details><summary>Discovery rule</summary>
-
-| Section | Rule name |
-| ------ | ------ |
-| Discovery of individual services | NAME_OF_THE_RULE  |
-
-| Option | Defailt value |
-| ------ | ------ |
-| OPTION 1 | disabled |
-
+There is no discovery rule.
 </details> 
 
 <details><summary>HW/SW inventory rules</summary>
-The inventory plugin is not configurable.
+There is no inventory rule.
 </details> 
 
 ---
