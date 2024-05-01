@@ -110,9 +110,9 @@ There is no inventory rule.
 
 Sample output
 
-![sample output](/img/sample.png?raw=true "sample output")
+![sample output](img/sample.png?raw=true "sample output")
 
 Sample output details
 
-![sample output details](/img/sample-details.png?raw=true "sample output details")
+![sample output details](img/sample-details.png?raw=true "sample output details")
 
