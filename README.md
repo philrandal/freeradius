@@ -1,4 +1,4 @@
-[PACKAGE]: ../../raw/master/mkp/freeradius-0.1.1-20240430.mkp "freeradius-0.1.1-20240430.mkp"
+[PACKAGE]: ../../raw/master/mkp/freeradius-0.1.2-20240501.mkp "freeradius-0.1.2-20240501.mkp"
 [PYRADLIB]: ../../raw/master/mkp/pyrad-2.4.0-240421.mkp "pyrad-2.4.0-240421.mkp"
 # FreeRADIUS
 

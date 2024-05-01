@@ -32,13 +32,10 @@
 
 import socket
 import pyrad.client
-from argparse import (
-    Namespace,
-)
+from argparse import Namespace
 from collections.abc import Mapping, Sequence
 from json import dumps as json_dumps
 from os import environ
-from time import time_ns
 from sys import (
     exit as sys_exit,
     stdout as sys_stdout,
