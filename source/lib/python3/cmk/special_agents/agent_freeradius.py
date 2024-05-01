@@ -75,7 +75,7 @@ def write_section(message: Mapping[str, any]):
 
 def parse_arguments(argv: Sequence[str] | None) -> Args:
     parser = create_default_argument_parser(__doc__)
-    parser.description = 'This is a special agent to collect stats data from FreeRADIS servers.'
+    parser.description = 'This is a CMK special agent to collect stats data from FreeRADIS servers.'
     parser.epilog = (
         f'(c) thl-cmk[at]outlook[dot], Version: {VERSION}, '
         f'For more information see: https://thl-cmk.hopto.org'
