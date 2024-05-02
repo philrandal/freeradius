@@ -105,6 +105,34 @@ There is no discovery rule.
 There is no inventory rule.
 </details> 
 
+<details><summary>Special agent CLI usage</summary>
+
+```
+:~$ ~/local/share/check_mk/agents/special/agent_freeradius -h
+usage: agent_freeradius [-h] [--debug] [--verbose] [--vcrtrace TRACEFILE] -H HOST --secret SECRET [--auth-port AUTH_PORT] [--timeout TIMEOUT]
+
+This is a CMK special agent to collect stats data from FreeRADIS servers.
+
+options:
+  -h, --help            show this help message and exit
+  --debug, -d           Enable debug mode (keep some exceptions unhandled)
+  --verbose, -v
+  --vcrtrace TRACEFILE, --tracefile TRACEFILE
+                            If this flag is set to a TRACEFILE that does not exist yet, it will be created and
+                            all requests the program sends and their corresponding answers will be recorded in said file.
+                            If the file already exists, no requests are sent to the server, but the responses will be
+                            replayed from the tracefile. 
+  -H HOST, --host HOST  Host/IP-Address of RADIUS server to query (required)
+  --secret SECRET       secret RADIUS key
+  --auth-port AUTH_PORT
+                        RADIUS authentication port to use.
+  --timeout TIMEOUT     RADIUS server timeout
+
+(c) thl-cmk[at]outlook[dot], Version: 0.1.1-20240430, For more information see: https://thl-cmk.hopto.org
+
+```
+</details>
+
 ---
 ### Sample Output
 
