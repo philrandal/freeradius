@@ -8,10 +8,14 @@
 # Date  : 2024-04-29
 # File  : freeradius.py (check plugin)
 
+# 2024-05-06: fixed crash in _rate_attributes (missing values to unpack)
+#             changed time output to render.datetime
 
 from _collections_abc import Mapping, Sequence
 from json import loads as json_loads, JSONDecodeError
-from time import localtime, mktime, strftime, strptime, time as now_tine
+from time import time as now_tine
+# from time import localtime, mktime, strftime, strptime, time as now_tine
+
 
 from cmk.base.plugins.agent_based.agent_based_api.v1 import (
     Result,
@@ -30,8 +34,8 @@ from cmk.base.plugins.agent_based.agent_based_api.v1.type_defs import (
     StringTable,
 )
 
-_CMK_TIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%m %Z'
-_FREERADIUS_TIME_FORMAT = "%b %d %Y %H:%M:%S %Z"
+# _CMK_TIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%m %Z'
+# _FREERADIUS_TIME_FORMAT = "%b %d %Y %H:%M:%S %Z"
 
 # Authentication attributes
 _FreeRADIUS_Total_Access_Requests = 'FreeRADIUS-Total-Access-Requests'
@@ -164,7 +168,7 @@ def _rate_attributes(params: Mapping[str, any], section: Mapping[str, int], attr
     now = now_tine()
     value_store = get_value_store()
 
-    for attribute, notice_only, upper, lower in attributes:
+    for attribute, notice_only in attributes:
         if (value := section.get(attribute)) is not None:
             try:
                 value = get_rate(value_store, _get_metric(attribute), now, value, raise_overflow=True)
@@ -217,11 +221,11 @@ def check_freeradius(params: Mapping[str, any], section: Mapping[str, int]) -> C
         )
         return
 
-    if isinstance(start_time, str):
-        # str to sec "Apr 29 2024 10:09:54 CEST" -> 1714378194.0
-        start_time = mktime(strptime(start_time, _FREERADIUS_TIME_FORMAT))
-    if isinstance(hup_time, str):
-        hup_time = mktime(strptime(hup_time, _FREERADIUS_TIME_FORMAT))
+    # if isinstance(start_time, str):
+    #     # str to sec "Apr 29 2024 10:09:54 CEST" -> 1714378194.0
+    #     start_time = mktime(strptime(start_time, _FREERADIUS_TIME_FORMAT))
+    # if isinstance(hup_time, str):
+    #     hup_time = mktime(strptime(hup_time, _FREERADIUS_TIME_FORMAT))
 
     yield from check_levels(
         value=now_tine() - start_time,
@@ -237,17 +241,19 @@ def check_freeradius(params: Mapping[str, any], section: Mapping[str, int]) -> C
         metric_name='reload',
     )
 
-    yield Result(
-        state=State.OK,
-        notice=f'Service started at: {strftime(_CMK_TIME_FORMAT, localtime(start_time))}'
-    )
+    # yield Result(
+    #     state=State.OK,
+    #     notice=f'Service started at: {strftime(_CMK_TIME_FORMAT, localtime(start_time))}'
+    # )
+    yield Result(state=State.OK, notice=f'Service started at: {render.datetime(start_time)}')
     if start_time != hup_time:
-        yield Result(
-            state=State.OK,
-            notice=f'Service restarted (HUP) at: {strftime(_CMK_TIME_FORMAT, localtime(hup_time))}'
-        )
+        # yield Result(
+        #     state=State.OK,
+        #     notice=f'Service restarted (HUP) at: {strftime(_CMK_TIME_FORMAT, localtime(hup_time))}'
+        # )
+        yield Result(state=State.OK, notice=f'Service reloaded (HUP) at: {render.datetime(hup_time)}')
     else:
-        yield Result(state=State.OK, notice='Service restarted (HUP) at: never')
+        yield Result(state=State.OK, notice='Service reloaded (HUP) at: never')
 
     yield Result(state=State.OK, summary=f'# of status attributes: {len(section)}')
 
