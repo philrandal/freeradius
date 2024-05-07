@@ -55,7 +55,7 @@ try:
 except ModuleNotFoundError:
     no_radiuslib = True
 
-VERSION = '0.1.1-20240430'
+VERSION = '0.1.3-20240507'
 
 
 class Args(Namespace):

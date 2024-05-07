@@ -10,6 +10,7 @@
 
 # 2024-05-06: fixed crash in _rate_attributes (missing values to unpack)
 #             changed time output to render.datetime
+# 2024-05-07: changed max CMK version in package info to 2.3.0b1
 
 from _collections_abc import Mapping, Sequence
 from json import loads as json_loads, JSONDecodeError
