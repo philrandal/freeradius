@@ -1,2 +1,5 @@
 2024-04-30: initial release
 2024-01-05: added missing check WATO file to the package
+2024-05-06: fixed crash in _rate_attributes (missing values to unpack)
+            changed time output to render.datetime
+2024-05-07: changed max CMK version in package info to 2.3.0b1
