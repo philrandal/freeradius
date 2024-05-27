@@ -24,6 +24,8 @@ In the Enterprise/Free/Cloud edition of CheckMK you can use the GUI to install t
 
 **Note**: before you can use this plugin you need to install the python lib [**_pyrad_**](https://github.com/pyradius/pyrad) into your CMK site. This can be done by issuing the command `pip3 install pyrad` as site user, as long as your CMK server has internet access. If you prefer not to download the pyrad lib from the internet you can also use the additional MKP package **_pyrad-2.4.0-240421.mkp_** (see above).
 
+To use this plugin the `status` module of the FreeRADIUS server must be enabled und accessible from the CheckMK site (see [Status of FreeRADIUS](https://wiki/freeradius.org/config/Status))
+
 ---
 ### Want to Contribute?
 
