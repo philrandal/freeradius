@@ -3,3 +3,4 @@
 2024-05-06: fixed crash in _rate_attributes (missing values to unpack)
             changed time output to render.datetime
 2024-05-07: changed max CMK version in package info to 2.3.0b1
+2024-06-17: modified imports for CMK 2.3
