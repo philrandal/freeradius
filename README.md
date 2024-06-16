@@ -1,5 +1,5 @@
-[PACKAGE]: ../../raw/master/mkp/freeradius-0.1.3-20240507.mkp "freeradius-0.1.3-20240507.mkp"
-[PYRADLIB]: ../../raw/master/mkp/pyrad-2.4.0-240421.mkp "pyrad-2.4.0-240421.mkp"
+[PACKAGE]: ../../raw/2.2.x/mkp/freeradius-0.1.3-20240507.mkp "freeradius-0.1.3-20240507.mkp"
+[PYRADLIB]: ../../raw/2.2.x/mkp/pyrad-2.4.0-240421.mkp "pyrad-2.4.0-240421.mkp"
 # FreeRADIUS
 
 This is a special agent to monitor FreeRADIUS servers. It will connect to the FreeRADIUS status server using the RADIUS protocol.
