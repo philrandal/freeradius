@@ -8,6 +8,8 @@
 # Date  : 2024-04-29
 # File  : agent_freeradius.py (special agent)
 
+# 2024-06-16: modified imports for CMK 2.3
+
 # /etc/freeradius/3.0/radiusd.conf
 # security {
 #     status_server = yes
@@ -41,10 +43,8 @@ from sys import (
     stdout as sys_stdout,
 )
 
-from cmk.special_agents.utils.agent_common import (
-    special_agent_main,
-)
-from cmk.special_agents.utils.argument_parsing import create_default_argument_parser
+from cmk.special_agents.v0_unstable.agent_common import special_agent_main
+from cmk.special_agents.v0_unstable.argument_parsing import create_default_argument_parser
 
 no_radiuslib = False
 try:

@@ -21,7 +21,7 @@
            'web': ['plugins/wato/agent_freeradiusi.py']},
  'name': 'freeradius',
  'title': 'FreeRADIUS special agent',
- 'version': '0.1.3-20240507',
- 'version.min_required': '2.2.0b1',
- 'version.packaged': '2.2.0p24',
- 'version.usable_until': '2.3.0b1'}
+ 'version': '0.1.3-20240617',
+ 'version.min_required': '2.3.0b1',
+ 'version.packaged': 'cmk-mkp-tool 0.2.0',
+ 'version.usable_until': '2.4.0b1'}
